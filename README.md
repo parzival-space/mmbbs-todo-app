@@ -18,7 +18,7 @@ The following features were required:
 
 ## Accessing the App
 
-The app is hosted on GitHub Pages for demonstration purposes. You can access it [here](https://yourusername.github.io/simple-todo-app).
+The app is hosted on GitHub Pages for demonstration purposes. You can access it [here](https://parzival-space.github.io/mmbbs-todo-app/).
 
 ### Disclaimer
 
