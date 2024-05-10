@@ -1,0 +1,124 @@
+<html lang="en">
+    <head>
+        <title>ToDo App - Overview</title>
+        <link rel="stylesheet" href="./style/base.css">
+        <link rel="stylesheet" href="./style/common.css">
+
+        <link rel="stylesheet" href="./style/app/base.css">
+
+        <link rel="icon" type="image/png" href="./public/app.png" />
+        <script src="https://kit.fontawesome.com/8356822277.js" crossorigin="anonymous"></script>
+
+        <script src="./script/app/utils.js" type="application/javascript" defer></script>
+        <script src="./script/app/auth.js" type="application/javascript" defer></script>
+        <script src="./script/app/todos.js" type="application/javascript" defer></script>
+        <script src="./script/app/storage.js" type="application/javascript" defer></script>
+
+        <!-- initialize page -->
+        <script type="application/javascript">
+            document.addEventListener("readystatechange", () => {
+                if (document.readyState !== "complete") return;
+
+                document.querySelectorAll(".todos ul li .checkbox input")
+                    .forEach(e => handleTodoStateChanged(e.element));
+            })
+        </script>
+
+        <!-- main logic -->
+        <script>
+            function addTodoBtnHandler(e) {
+                let menu = document.querySelector(".menu");
+                menu.setAttribute("mode", "create");
+                menu.setAttribute("uuid", undefined);
+                menu.setAttribute("state", "shown");
+            }
+
+            function createEditFormHandler(e) {
+                let form = new FormData(document.querySelector(".menu form"));
+
+                if (e.parentElement.getAttribute("mode") === "create") {
+                    // creates a new todo
+                    let todo = {
+                        name: form.get("name"),
+                        description: form.get("description"),
+                        priority: form.get("priority"),
+                        complete: false,
+                        uuid: uuidv4()
+                    };
+
+                    // write new todo to storage
+                    let storage = getStorage();
+                    storage.todos.push(todo);
+                    setStorage(storage);
+
+                    // update UI
+                    createTodo(todo.name, todo.description, todo.priority, todo.complete, todo.uuid);
+                    sortTodos();
+
+                    e.parentElement.setAttribute("state", "hidden");
+                } else {
+                    // edit existing todo
+                    let todoIndex = getStorage().todos.findIndex(item => item.uuid === e.parentElement.getAttribute("uuid"));
+                    let storage = getStorage();
+
+                    // update values
+                    storage.todos[todoIndex].name = form.get("name");
+                    storage.todos[todoIndex].description = form.get("description");
+                    storage.todos[todoIndex].priority = form.get("priority");
+                    setStorage(storage);
+
+                    // update UI
+                    document.querySelector(`.todos ul li[uuid="${storage.todos[todoIndex].uuid}"]`).remove();
+                    createTodo(storage.todos[todoIndex].name, storage.todos[todoIndex].description, storage.todos[todoIndex].priority, storage.todos[todoIndex].complete, storage.todos[todoIndex].uuid);
+                    sortTodos();
+
+                    e.parentElement.setAttribute("state", "hidden");
+                }
+            }
+        </script>
+
+    </head>
+    <body>
+        <div class="header">
+            <button onclick="history.back()">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div class="title">
+                <h1>My TODOs</h1>
+                <span>0 remaining</span>
+            </div>
+        </div>
+
+        <div class="todos">
+            <ul></ul>
+        </div>
+
+        <button id="newTodoBtn" onclick="addTodoBtnHandler(this)">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <div class="menu" mode="create" uuid="undefined">
+            <span class="separator"></span>
+            <h1 class="create-title">Create new TODO</h1>
+            <h1 class="edit-title">Edit existing TODO</h1>
+            <p>
+                Enter your TODO information below.
+            </p>
+            <form action="javascript:void(0)" onsubmit="createEditFormHandler(this)">
+                <label for="name">Name</label>
+                <input required type="text" id="name" name="name">
+
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description">
+
+                <label for="priority">Priority</label>
+                <input required type="number" min="0" max="100" value="0" name="priority" id="priority">
+
+                <div class="actions">
+                    <input type="reset" value="Reset">
+                    <input type="submit" value="Continue">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

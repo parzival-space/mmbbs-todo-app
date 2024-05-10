@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    height: 60px;
+    background: var(--background-secondary);
+}
+
+.header .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.header .title h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.header button {
+    background: none;
+    outline: none;
+    border: none;
+    color: #fff;
+    padding-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 100%;
+    border-radius: 0;
+}
+.header button:hover {
+    cursor: pointer;
+    color: var(--color-hover);
+}

@@ -1,0 +1,115 @@
+.todos {
+    overflow: scroll;
+    height: calc(100% - 60px);
+    max-height: calc(100% - 60px);
+}
+
+.todos ul {
+    padding: 0;
+}
+
+.todos ul li {
+    list-style-type: none;
+    margin: 0;
+
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.todos ul li {
+    margin-bottom: 10px;
+}
+.todos ul li:last-child {
+    margin-bottom: 85px;
+}
+
+.todos ul li .checkbox {
+    display: block;
+    user-select: none;
+    position: relative;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.todos ul li .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.todos ul li .checkbox input:checked ~ .checkmark :nth-child(2) {
+    display: block;
+}
+.todos ul li .checkbox input:checked ~ .checkmark :nth-child(1) {
+    display: none;
+}
+
+.todos ul li .checkbox .checkmark {
+    display: flex;
+    left: 0;
+    height: 100%;
+    width: 25px;
+    font-size: 25px;
+    align-items: center;
+}
+.todos ul li .checkbox .checkmark:hover {
+    color: var(--color-hover);
+}
+
+
+.todos ul li .checkbox .checkmark :nth-child(2) {
+    display: none;
+}
+
+
+/** required for js **/
+.todos ul li[state="completed"] {
+    opacity: 0.5;
+}
+.todos ul li[state="completed"] .details {
+    text-decoration: line-through;
+}
+
+
+ul li .details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+ul li .details h1 {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+ul li .details p {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+ul li .priority {
+    height: 100%;
+    text-align: center;
+    align-self: center;
+}
+
+ul li button {
+    border-radius: 0;
+    background: none;
+    outline: none;
+    border: none;
+
+    font-size: 20px;
+    background: transparent;
+    color: #fff;
+
+    width: 40px;
+}
+ul li button:hover {
+    cursor: pointer;
+    color: var(--color-hover);
+}

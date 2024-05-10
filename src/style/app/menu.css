@@ -1,0 +1,91 @@
+.menu {
+    position: absolute;
+    display: none;
+    z-index: 100;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    background: var(--background-secondary);
+}
+
+.menu[state="shown"] {
+    display: block;
+}
+
+.menu .separator {
+    height: 1px;
+    background: #fff;
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+}
+
+.menu h1 {
+    display: none;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.menu p {
+    text-align: center;
+    width: 100%;
+}
+
+.menu[mode="create"] .create-title { display: block; }
+.menu[mode="edit"] .edit-title { display: block; }
+
+.menu form {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu form label {
+    font-size: 12px;
+}
+.menu form input[type="text"],
+.menu form input[type="number"] {
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: #fff 2px solid;
+    color: #fff;
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.menu form .actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+}
+
+.menu form .actions input {
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.menu form .actions input[type="submit"] {
+    background: #537F27;
+    border-color: #80F60E;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.menu form .actions input[type="reset"] {
+    background: #812727;
+    border-color: #F80E0E;
+    color: #fff;
+    border-radius: 5px;
+}

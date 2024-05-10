@@ -1,0 +1,41 @@
+@import "./header.css";
+@import "./todos.css";
+@import "./menu.css";
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#newTodoBtn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+
+    z-index: 5;
+
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    background: #00b4d8;
+    color: #fff;
+
+    padding: 0;
+    line-height: 24px;
+    width: 56px;
+    height: 56px;
+
+    outline: none;
+    border: none;
+    border-radius: 50%;
+}
+
+#newTodoBtn:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+}
+
+
+
+
